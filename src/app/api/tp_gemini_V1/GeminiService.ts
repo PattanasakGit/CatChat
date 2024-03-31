@@ -1,0 +1,44 @@
+import { ICatPersonality } from '@/app/models/ICat';
+import {ChatHistory} from '../../models/IGemini'
+import catPersonality from './catPersonality.json'
+import dotenv from 'dotenv';
+dotenv.config();
+
+const checkWho = (id: string): string => {
+  const foundItem = catPersonality.find(item => item.id === id);
+  
+  if (foundItem) {
+      console.log("✅✅✅✅✅");
+      console.log(foundItem.personality);
+      return foundItem.personality;
+  } else {
+      return "ตอบฉันกลับมาแค่ 'พบข้อผิดพลาด' เท่านั้น";
+  }
+};
+
+
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const gemini_key = process.env.API_GEMINI_KEY
+const genAI = new GoogleGenerativeAI(gemini_key);
+
+
+export default async function run_gemini(prompt:string , history:ChatHistory , id:string): Promise<string>{
+  const botPrompt = checkWho(id);
+  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
+  const chat = model.startChat({
+    history: history
+    // generationConfig: {
+    //   maxOutputTokens: 100,
+    // },
+  });
+
+  console.log("=======================================");
+  // console.log(botPrompt);
+  console.log("=======================================");
+
+  const result = await chat.sendMessage([botPrompt + prompt]);
+  const response = await result.response;
+  const text = response.text();
+  return text;
+}
