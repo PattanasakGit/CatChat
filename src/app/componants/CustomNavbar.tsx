@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import catData from "../../../public/catData.json";
 import { ICat } from '../models/ICat';
-import app from "../page"
 
 const languages: string[] = ['ไทย', 'English', 'Spanish', 'French', 'German', 'Chinese', 'Japanese', 'Russian', 'Arabic'];
 
@@ -14,7 +13,7 @@ const CustomNavbar: React.FC = () => {
   const catDropdownRef = useRef<HTMLDivElement>(null);
   const languageDropdownRef = useRef<HTMLDivElement>(null);
 
-  localStorage.setItem('selectedCat', JSON.stringify(selectedCat));
+  // localStorage.setItem('selectedCat', JSON.stringify(selectedCat));
 
   useEffect(() => {
     function handleDropdownClickOutside(event: MouseEvent) {
