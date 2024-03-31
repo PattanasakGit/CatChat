@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import catData from "../../../public/catData.json";
 import { ICat } from '../models/ICat';
+import app from "../page"
 
 const languages: string[] = ['ไทย', 'English', 'Spanish', 'French', 'German', 'Chinese', 'Japanese', 'Russian', 'Arabic'];
 
@@ -12,6 +13,8 @@ const CustomNavbar: React.FC = () => {
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>('ไทย');
   const catDropdownRef = useRef<HTMLDivElement>(null);
   const languageDropdownRef = useRef<HTMLDivElement>(null);
+
+  localStorage.setItem('selectedCat', JSON.stringify(selectedCat));
 
   useEffect(() => {
     function handleDropdownClickOutside(event: MouseEvent) {
@@ -43,8 +46,8 @@ const CustomNavbar: React.FC = () => {
   };
 
   const CatDetails: React.FC<{ cat: ICat }> = ({ cat }) => (
-    <div className="flex flex-col items-center p-4 transform hover:scale-[1.1] transition-transform duration-300 hover:bg-orange-100 rounded-md ">
-      <img src={cat.image} alt={cat.name} className="w-[10vw] rounded-full mb-2" />
+    <div className="flex flex-col items-center transform hover:scale-[1.1] transition-transform duration-300 hover:bg-orange-100 rounded-md ">
+      <img src={cat.image} alt={cat.name} className="py-2 w-[90px] md:w-[110px] lg:w-[125px] xl:w-[150px] rounded-full mb-2" />
       <div className="text-center">
         <h3 className="text-lg sm:text-xl md:text-xl lg:text-[15px] font-bold">{cat.name}</h3>
         <p className="text-sm sm:text-base md:text-lg lg:text-[15px]">{cat.summary}</p>
@@ -72,10 +75,10 @@ const CustomNavbar: React.FC = () => {
 
             {showCatDropdown && (
               <div className="fixed top-[42vh] left-0 w-full h-full flex justify-center items-center z-[999]">
-                <div className="bg-white text-gray-800 rounded-md shadow-lg p-4 
+                <div className="bg-white bg-opacity-95 backdrop-blur-[500px] text-gray-800 rounded-md shadow-lg p-4 
                   w-[96%] md:w-[70%] lg:w-[60%] xl:w-[50%] overflow-auto h-[70vh] xl:overflow-hide
                 ">
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-2 gap-4 xl:grid-cols-3">
                     {catData.map((cat: ICat) => (
                       <div key={cat.name} className="cursor-pointer" onClick={() => handleCatSelect(cat)}>
                         <CatDetails cat={cat} />

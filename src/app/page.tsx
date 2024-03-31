@@ -4,8 +4,10 @@ import DisplayChat from "../app/componants/DispayChat";
 import customAPI from "../app/componants/ServerService";
 import { ChatHistory, Message } from "./models/IGemini";
 import { ICat } from "./models/ICat";
+import { IoSend } from "react-icons/io5";
+import { IoTrashBin } from "react-icons/io5";
 
-export default function Counter() {
+export default function app() {
  const [promptTextInput, setPromptTextInput] = useState<string>("");
  const [messages, setMessages] = useState<ChatHistory['history']>([]);
  const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -45,7 +47,7 @@ export default function Counter() {
    setIsLoading(false);
  };
 
- const handleButtonClear = async () => {
+  const handleButtonClear = async () => {
    setMessages([]);
    setPromptTextInput('');
    setIsLoading(false);
@@ -66,8 +68,8 @@ export default function Counter() {
  };
 
  return (
-   <div className="w-full pt-[4rem] h-[100vh] relative">
-     <div className="rounded-xl overflow-y-auto flex flex-col h-[85%] p-4 w-[96%] md:w-[90%] lg:w-[80%] xl:w-[75%] backdrop-blur-[3px] bg-[#00000040] mx-auto my-4">
+   <div className="w-full pt-[4rem] h-full relative">
+     <div className="rounded-xl overflow-y-auto flex flex-col h-[75vh] md:h-[80vh] lg:h-[75vh] xl:h-[75vh] p-4 w-[96%] md:w-[90%] lg:w-[80%] xl:w-[75%] backdrop-blur-[3px] bg-[#00000040] mx-auto my-4">
        {messages.map((message, index) => (
          <DisplayChat key={index} message={message} index={index} />
        ))}
@@ -99,13 +101,13 @@ export default function Counter() {
        )}
      </div>
 
-     <div className="fixed bottom-[-30px] p-1.5 w-[98%] md:w-[90%] lg:w-[80%] xl:w-[70%] h-[9%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl shadow-xl border-3 border-stone-800 backdrop-blur-xl bg-black bg-opacity-40">
+     <div className="fixed bottom-[-20px] p-1.5 w-[98%] md:w-[90%] lg:w-[80%] xl:w-[70%] h-[9%] md:h-[7%] lg:h-[9%] xl:h-[9%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl shadow-xl border-3 border-stone-800 backdrop-blur-xl bg-black bg-opacity-40">
        <div className="flex items-center w-full h-full justify-center">
          <button
-           className="bg-blue-500 text-white p-1 rounded-xl h-full w-[50px] md:w-[70px] lg:w-[80px] xl:w-[90px]"
+           className="bg-zinc-500 hover:bg-zinc-600 text-white p-1 rounded-xl h-full w-[50px] md:w-[70px] lg:w-[80px] xl:w-[90px] flex justify-center items-center"
            onClick={handleButtonClear}
          >
-           🗑️🧹
+           <IoTrashBin />
          </button>
          <input
            className="h-full w-[80%] p-4 mx-3 border rounded-xl resize-none outline-none focus:border-yellow-900"
@@ -115,10 +117,10 @@ export default function Counter() {
            onKeyDown={handleKeyDown}
          />
          <button
-           className="bg-green-800 text-white p-1 rounded-xl h-full w-[50px] md:w-[70px] lg:w-[80px] xl:w-[90px]"
+           className="bg-orange-400 hover:bg-orange-500 text-white p-1 rounded-xl h-full w-[50px] md:w-[70px] lg:w-[80px] xl:w-[90px] flex justify-center items-center"
            onClick={handleButtonClick}
          >
-           📤
+           <IoSend />
          </button>
        </div>
      </div>

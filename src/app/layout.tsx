@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="th">
-      <body className="m-0 p-0 " style={{ background: `url('/img/BG-0${random(1,8)}.jpg') center center / cover fixed no-repeat`, fontFamily: "Noto Serif Thai" }}>
+      <body className="m-0 p-0 " style={{ background: `url('/img/BG-05.jpg') center center / cover fixed no-repeat`, fontFamily: "Noto Serif Thai" }}>
         <section className='fixed w-full top-0 z-[1000]'>
           <CustomNavbar />
         </section>
