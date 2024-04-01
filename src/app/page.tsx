@@ -69,7 +69,7 @@ export default function app() {
 
  return (
    <div className="w-full pt-[4rem] h-full relative">
-     <div className="rounded-xl overflow-y-auto flex flex-col h-[75vh] md:h-[80vh] lg:h-[75vh] xl:h-[75vh] p-4 w-[96%] md:w-[90%] lg:w-[80%] xl:w-[75%] backdrop-blur-[3px] bg-[#00000040] mx-auto my-4">
+     <div className="rounded-xl overflow-y-auto flex flex-col h-[77dvh] md:h-[83dvh] lg:h-[75dvh] xl:h-[75dvh] p-4 w-[96%] md:w-[95%] lg:w-[80%] xl:w-[75%] backdrop-blur-[3px] bg-[#00000040] mx-auto my-4">
        {messages.map((message, index) => (
          <DisplayChat key={index} message={message} index={index} />
        ))}
@@ -110,7 +110,7 @@ export default function app() {
            <IoTrashBin />
          </button>
          <input
-           className="h-full w-[80%] p-4 mx-3 border rounded-xl resize-none outline-none focus:border-yellow-900"
+           className="h-full w-[85%] p-4 mx-3 border rounded-xl resize-none outline-none focus:border-yellow-900"
            placeholder="กรุณาพิมพ์ข้อความของคุณ"
            value={promptTextInput}
            onChange={handlePromptChange}

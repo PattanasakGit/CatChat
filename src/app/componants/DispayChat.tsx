@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import { Message } from '../models/IGemini';
 import {ICat} from '../../app/models/ICat'
 
+
 const DisplayChat = React.memo(({ message, index }: { message: Message, index: number }) => {
   const selectedCatJSON = localStorage.getItem('selectedCat');
   const selectedCat:ICat = selectedCatJSON ? JSON.parse(selectedCatJSON) : null;
@@ -13,7 +14,7 @@ const DisplayChat = React.memo(({ message, index }: { message: Message, index: n
         <div className="border-4 rounded-[1000px] w-10 mb-1">
           <img
             src={selectedCat.image}
-            alt="AI Profile" className="rounded-[1000px]"
+            alt="AI Profile" className="rounded-[1000px] "
           />
         </div>
       )}
