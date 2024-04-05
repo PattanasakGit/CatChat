@@ -13,7 +13,6 @@ export default function app() {
  const [messages, setMessages] = useState<ChatHistory['history']>([]);
  const messagesEndRef = useRef<HTMLDivElement>(null);
  const [isLoading, setIsLoading] = useState(false);
-
  const { selectedCat } = useCatStore();
  const { isClearData } = useClearData();
 
@@ -40,9 +39,18 @@ export default function app() {
      };
      setMessages(prevMessages => [...prevMessages, assistantMessage]);
    } catch (error) {
-     console.error('Error calling API:', error);
-     setMessages(prevMessages => [...prevMessages, { role: 'model', parts: [{ text: 'An error occurred while processing your request. Please try again later.' }] }]);
-   }
+        try {
+          const resultByGemini = await customAPI.Post(dataToServer);
+          const assistantMessage: Message = {
+            role: "model",
+            parts: [{ text: resultByGemini.message }],
+          };
+          setMessages(prevMessages => [...prevMessages, assistantMessage]);
+        } catch (error) {
+          console.error('Error calling API:', error);
+          setMessages(prevMessages => [...prevMessages, { role: 'model', parts: [{ text: 'ขออภัยครับระบบขัดข้องโปรดลองอีกครั้งภายหลัง' }] }]);
+        }
+     }
 
    setIsLoading(false);
  };

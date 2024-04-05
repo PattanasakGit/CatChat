@@ -4,24 +4,13 @@ import catData from "../../../public/catData.json";
 import { ICat } from '../models/ICat';
 import {useCatStore} from '../../app/store/CatStore';
 import { useClearData } from '../store/ClearDataState';
+import { AiOutlineClose } from "react-icons/ai";
 
 const CustomNavbar: React.FC = () => {
   const [showCatDropdown, setShowCatDropdown] = useState<boolean>(false);
   const { selectedCat, setSelectedCat } = useCatStore();
   const catDropdownRef = useRef<HTMLDivElement>(null);
   const { isClearData,setIsClearData } = useClearData();
-
-  useEffect(() => {
-    function handleDropdownClickOutside(event: MouseEvent) {
-      if (catDropdownRef.current && !catDropdownRef.current.contains(event.target as Node)) {
-        setShowCatDropdown(false);
-      }
-    }
-    document.addEventListener('mousedown', handleDropdownClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleDropdownClickOutside);
-    };
-  }, []);
 
   const toggleCatDropdown = () => setShowCatDropdown(prevState => !prevState);
 
@@ -42,8 +31,9 @@ const CustomNavbar: React.FC = () => {
   );
   
   return (
-    <div className="backdrop-blur-[800px] bg-black bg-opacity-50 text-white py-4 pl-[10vw] pr-2 z-[955]">
-      <div className="container mx-auto flex justify-between items-center">
+    // <div className="backdrop-blur-[800px] bg-black bg-opacity-50 text-white py-4 pl-[10vw] pr-2 z-[955]">
+    <div className="bg-black bg-opacity-40 text-white py-4 pl-[10vw] pr-2 z-[955]">
+      <div className="container mx-auto flex justify-between items-center h-6">
         <div className="text-xl font-bold">CATchat</div>
         <div className="flex">
           <div className="relative inline-block" ref={catDropdownRef}>
@@ -67,9 +57,18 @@ const CustomNavbar: React.FC = () => {
             </button>
 
             {showCatDropdown && (
-              <div className="fixed top-[42vh] left-0 w-full h-full flex justify-center items-center z-[999]">
+              <div className="fixed top-[10vh] left-0 w-full grid place-items-center">
+
+                  <div className=' h-8 w-[96%] md:w-[70%] lg:w-[60%] xl:w-[50%] flex justify-end items-center mb-1'>
+                    <button className='rounded-[10px] bg-red-600 h-full px-4'
+                      onClick={() => setShowCatDropdown(false)}
+                    >
+                      <AiOutlineClose />
+                    </button>
+                  </div>
+
                 <div
-                  className="bg-white bg-opacity-95 backdrop-blur-[500px] text-gray-800 rounded-md shadow-lg p-4 
+                  className="bg-white text-gray-800 rounded-[20px] shadow-lg p-4 
                   w-[96%] md:w-[70%] lg:w-[60%] xl:w-[50%] overflow-auto h-[70vh] xl:overflow-hide
                 "
                 >
