@@ -5,7 +5,8 @@ import customAPI from "../app/componants/ServerService";
 import { ChatHistory, Message } from "./models/IGemini";
 import { IoSend } from "react-icons/io5";
 import { IoTrashBin } from "react-icons/io5";
-import useCatStore from "./store/CatStore";
+import {useCatStore} from "./store/CatStore";
+import { useClearData } from "./store/ClearDataState";
 
 export default function app() {
  const [promptTextInput, setPromptTextInput] = useState<string>("");
@@ -14,6 +15,7 @@ export default function app() {
  const [isLoading, setIsLoading] = useState(false);
 
  const { selectedCat } = useCatStore();
+ const { isClearData } = useClearData();
 
  const handlePromptChange = (event: React.ChangeEvent<HTMLInputElement>) => {
    setPromptTextInput(event.target.value);
@@ -58,8 +60,12 @@ export default function app() {
  };
 
  useEffect(() => {
-   scrollToBottom();
+   scrollToBottom()
  }, [messages]);
+
+ useEffect(() => {
+   handleButtonClear();
+ }, [isClearData]);
 
  const scrollToBottom = () => {
    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });

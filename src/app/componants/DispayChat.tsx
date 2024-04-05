@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Message } from '../models/IGemini';
-import useCatStore from '../store/CatStore';
+import {useCatStore} from '../store/CatStore';
 
 const DisplayChat = React.memo(({ message, index }: { message: Message, index: number }) => {
   const { selectedCat } = useCatStore();

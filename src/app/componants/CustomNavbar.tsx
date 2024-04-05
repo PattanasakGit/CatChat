@@ -2,13 +2,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import catData from "../../../public/catData.json";
 import { ICat } from '../models/ICat';
-import useCatStore from '../../app/store/CatStore';
+import {useCatStore} from '../../app/store/CatStore';
+import { useClearData } from '../store/ClearDataState';
 
 const CustomNavbar: React.FC = () => {
   const [showCatDropdown, setShowCatDropdown] = useState<boolean>(false);
   const { selectedCat, setSelectedCat } = useCatStore();
   const catDropdownRef = useRef<HTMLDivElement>(null);
-  const languageDropdownRef = useRef<HTMLDivElement>(null);
+  const { isClearData,setIsClearData } = useClearData();
 
   useEffect(() => {
     function handleDropdownClickOutside(event: MouseEvent) {
@@ -26,6 +27,7 @@ const CustomNavbar: React.FC = () => {
 
   const handleCatSelect = (cat: ICat) => {
     setSelectedCat(cat);
+    setIsClearData(!isClearData);
     setShowCatDropdown(false);
   };
 
@@ -86,10 +88,6 @@ const CustomNavbar: React.FC = () => {
               </div>
             )}
           </div>
-          <div
-            className="relative inline-block ml-4"
-            ref={languageDropdownRef}
-          ></div>
         </div>
       </div>
     </div>

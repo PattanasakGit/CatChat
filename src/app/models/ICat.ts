@@ -8,4 +8,9 @@ export interface ICatPersonality {
     id: string;
     personality: string;
   }
+
+export  interface CatState {
+    selectedCat: ICat;
+    setSelectedCat: (cat: ICat) => void;
+  }
   
