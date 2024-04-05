@@ -3,9 +3,9 @@ import React, { useEffect, useRef, useState } from "react";
 import DisplayChat from "../app/componants/DispayChat";
 import customAPI from "../app/componants/ServerService";
 import { ChatHistory, Message } from "./models/IGemini";
-import { ICat } from "./models/ICat";
 import { IoSend } from "react-icons/io5";
 import { IoTrashBin } from "react-icons/io5";
+import useCatStore from "./store/CatStore";
 
 export default function app() {
  const [promptTextInput, setPromptTextInput] = useState<string>("");
@@ -13,9 +13,7 @@ export default function app() {
  const messagesEndRef = useRef<HTMLDivElement>(null);
  const [isLoading, setIsLoading] = useState(false);
 
- const selectedCatJSON = typeof localStorage !== 'undefined' ? localStorage.getItem('selectedCat') : null;
- const selectedCat: ICat = selectedCatJSON ? JSON.parse(selectedCatJSON) : null;
-
+ const { selectedCat } = useCatStore();
 
  const handlePromptChange = (event: React.ChangeEvent<HTMLInputElement>) => {
    setPromptTextInput(event.target.value);

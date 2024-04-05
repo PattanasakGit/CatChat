@@ -22,7 +22,8 @@
     "react-speech-recognition": "^3.10.0",
     "say": "^0.16.0",
     "text-to-speech-js": "^1.1.10",
-    "yarn": "^1.22.21"
+    "yarn": "^1.22.21",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/node": "^20",
