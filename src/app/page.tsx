@@ -87,8 +87,7 @@ export default function app() {
          <DisplayChat key={index} message={message} index={index} />
        ))}
        <div ref={messagesEndRef} />
-       {/* {isLoading && ( */}
-       {true && (
+       {isLoading && (
          <div className="mt-8 flex mr-2">
          {catLoading.iframeData.map((iframe, index) => (
            <iframe
