@@ -87,13 +87,14 @@ export default function app() {
          <DisplayChat key={index} message={message} index={index} />
        ))}
        <div ref={messagesEndRef} />
-       {isLoading && (
+       {/* {isLoading && ( */}
+       {true && (
          <div className="mt-8 flex mr-2">
          {catLoading.iframeData.map((iframe, index) => (
            <iframe
              key={index}
              src={iframe.src}
-             className={iframe.className}
+             className="w-[20vw] md:w-[10vw] lg:w-[8vw] xl:w-[6vw]"
            ></iframe>
          ))}
        </div>
