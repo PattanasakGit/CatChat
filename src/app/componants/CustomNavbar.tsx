@@ -1,5 +1,5 @@
-"use client"
-import React, { useState, useEffect, useRef } from 'react';
+'use client'
+import React, { useState, useRef } from 'react';
 import catData from "../../../public/catData.json";
 import { ICat } from '../models/ICat';
 import {useCatStore} from '../../app/store/CatStore';

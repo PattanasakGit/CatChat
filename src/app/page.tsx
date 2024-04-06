@@ -7,6 +7,7 @@ import { IoSend } from "react-icons/io5";
 import { IoTrashBin } from "react-icons/io5";
 import {useCatStore} from "./store/CatStore";
 import { useClearData } from "./store/ClearDataState";
+import catLoading from "../../public/catLoding.json"
 
 export default function app() {
  const [promptTextInput, setPromptTextInput] = useState<string>("");
@@ -88,19 +89,14 @@ export default function app() {
        <div ref={messagesEndRef} />
        {isLoading && (
          <div className="mt-8 flex mr-2">
+         {catLoading.iframeData.map((iframe, index) => (
            <iframe
-             src="https://lottie.host/embed/0b548f7c-2bd2-44ae-b308-d31dc47fa04e/MrPXcjNxYL.json"
-             className="w-20 h-20"
+             key={index}
+             src={iframe.src}
+             className={iframe.className}
            ></iframe>
-           <iframe
-             src="https://lottie.host/embed/b8cb5b5e-04ca-4473-9931-0b650266d680/tsGOzw5Zi8.json"
-             className="w-20 h-20"
-           ></iframe>
-           <iframe
-             src="https://lottie.host/embed/0b548f7c-2bd2-44ae-b308-d31dc47fa04e/MrPXcjNxYL.json"
-             className="w-20 h-20"
-           ></iframe>
-         </div>
+         ))}
+       </div>
        )}
 
        {messages.length === 0 && (
