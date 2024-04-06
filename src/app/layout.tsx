@@ -11,10 +11,6 @@ export const metadata = {
   }
 }
 
-function random(min:number, max:number) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
 export default function RootLayout({
   children,
 }: {
@@ -22,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="th">
-      <body className="m-0 p-0 " style={{ background: `url('/img/BG-05.jpg') center center / cover fixed no-repeat`, fontFamily: "Noto Serif Thai" }}>
+      <body className="m-0 p-0 " style={{ background: `url('/img/BG-05.jpg') center center / cover fixed no-repeat` }}>
         <section className='fixed w-full top-0 z-[1000]'>
           <CustomNavbar />
         </section>

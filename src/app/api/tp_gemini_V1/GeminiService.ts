@@ -30,8 +30,10 @@ export default async function run_gemini(prompt:string , history:ChatHistory , i
     // },
   });
 
-  const result = await chat.sendMessage([botPrompt + prompt]);
+  const messageToLLM = `บุคลิกของคุณคือ (${botPrompt}) ใช้คำลงท้ายว่า 'เหมียว' ตามความเหมาสม และห้ามอธิบายนิสัยตัวเองเด็ดขาด โดยคำนึงถึงเนื้อหาในข้อความของผู้ใช้ (${prompt}) `
+
+  const result = await chat.sendMessage(messageToLLM);
   const response = await result.response;
   const text = response.text();
   return text;
-}
+}``

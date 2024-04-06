@@ -3,19 +3,19 @@ import React, { useEffect, useRef, useState } from "react";
 import DisplayChat from "../app/componants/DispayChat";
 import customAPI from "../app/componants/ServerService";
 import { ChatHistory, Message } from "./models/IGemini";
-import { ICat } from "./models/ICat";
 import { IoSend } from "react-icons/io5";
 import { IoTrashBin } from "react-icons/io5";
+import {useCatStore} from "./store/CatStore";
+import { useClearData } from "./store/ClearDataState";
+import catLoading from "../../public/catLoding.json"
 
 export default function app() {
  const [promptTextInput, setPromptTextInput] = useState<string>("");
  const [messages, setMessages] = useState<ChatHistory['history']>([]);
  const messagesEndRef = useRef<HTMLDivElement>(null);
  const [isLoading, setIsLoading] = useState(false);
-
- const selectedCatJSON = typeof localStorage !== 'undefined' ? localStorage.getItem('selectedCat') : null;
- const selectedCat: ICat = selectedCatJSON ? JSON.parse(selectedCatJSON) : null;
-
+ const { selectedCat } = useCatStore();
+ const { isClearData } = useClearData();
 
  const handlePromptChange = (event: React.ChangeEvent<HTMLInputElement>) => {
    setPromptTextInput(event.target.value);
@@ -40,9 +40,18 @@ export default function app() {
      };
      setMessages(prevMessages => [...prevMessages, assistantMessage]);
    } catch (error) {
-     console.error('Error calling API:', error);
-     setMessages(prevMessages => [...prevMessages, { role: 'model', parts: [{ text: 'An error occurred while processing your request. Please try again later.' }] }]);
-   }
+        try {
+          const resultByGemini = await customAPI.Post(dataToServer);
+          const assistantMessage: Message = {
+            role: "model",
+            parts: [{ text: resultByGemini.message }],
+          };
+          setMessages(prevMessages => [...prevMessages, assistantMessage]);
+        } catch (error) {
+          console.error('Error calling API:', error);
+          setMessages(prevMessages => [...prevMessages, { role: 'model', parts: [{ text: 'ขออภัยครับระบบขัดข้องโปรดลองอีกครั้งภายหลัง' }] }]);
+        }
+     }
 
    setIsLoading(false);
  };
@@ -60,8 +69,12 @@ export default function app() {
  };
 
  useEffect(() => {
-   scrollToBottom();
+   scrollToBottom()
  }, [messages]);
+
+ useEffect(() => {
+   handleButtonClear();
+ }, [isClearData]);
 
  const scrollToBottom = () => {
    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -76,19 +89,14 @@ export default function app() {
        <div ref={messagesEndRef} />
        {isLoading && (
          <div className="mt-8 flex mr-2">
+         {catLoading.iframeData.map((iframe, index) => (
            <iframe
-             src="https://lottie.host/embed/0b548f7c-2bd2-44ae-b308-d31dc47fa04e/MrPXcjNxYL.json"
-             className="w-20 h-20"
+             key={index}
+             src={iframe.src}
+             className={iframe.className}
            ></iframe>
-           <iframe
-             src="https://lottie.host/embed/b8cb5b5e-04ca-4473-9931-0b650266d680/tsGOzw5Zi8.json"
-             className="w-20 h-20"
-           ></iframe>
-           <iframe
-             src="https://lottie.host/embed/0b548f7c-2bd2-44ae-b308-d31dc47fa04e/MrPXcjNxYL.json"
-             className="w-20 h-20"
-           ></iframe>
-         </div>
+         ))}
+       </div>
        )}
 
        {messages.length === 0 && (

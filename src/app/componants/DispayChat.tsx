@@ -1,13 +1,10 @@
-'use client'
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Message } from '../models/IGemini';
-import {ICat} from '../../app/models/ICat'
-
+import {useCatStore} from '../store/CatStore';
 
 const DisplayChat = React.memo(({ message, index }: { message: Message, index: number }) => {
-  const selectedCatJSON = localStorage.getItem('selectedCat');
-  const selectedCat:ICat = selectedCatJSON ? JSON.parse(selectedCatJSON) : null;
+  const { selectedCat } = useCatStore();
   return (
     <>
       {message.role === "model" && (
@@ -22,8 +19,8 @@ const DisplayChat = React.memo(({ message, index }: { message: Message, index: n
         key={index}
         className={`p-4 ${
           message.role === "user"
-            ? "bg-blue-100 text-blue-800 self-end rounded-xl max-w-[50%] my-4"
-            : "backdrop-blur-[50px] bg-[#ffffffd7] text-gray-800 self-start rounded-xl max-w-[90%] lg:max-w-[50%]"
+            ? "bg-blue-100 text-blue-800 self-end rounded-xl max-w-[80%] lg:max-w-[60%] my-4"
+            : "bg-[#ffffffc5] text-gray-800 self-start rounded-xl max-w-[90%] lg:max-w-[70%]"
         }`}
       >
         {message.parts.map((part, partIndex) => (
