@@ -1,7 +1,6 @@
-import { ICatPersonality } from '@/app/models/ICat';
-import {ChatHistory} from '../../models/IGemini'
-import catPersonality from './catPersonality.json'
 import dotenv from 'dotenv';
+import { ChatHistory } from '../../../models/IGemini';
+import catPersonality from './catPersonality.json';
 dotenv.config();
 
 const checkWho = (id: string): string => {

@@ -1,6 +1,5 @@
-import Image from 'next/image';
+import BackgroundChanger from '../utils/backgroundChanger';
 import CustomNavbar from './componants/CustomNavbar';
-import LOGO from '../../public/img/logo.png'
 import './globals.css';
 
 export const metadata = {
@@ -11,21 +10,16 @@ export const metadata = {
   }
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="th">
-      <body className="m-0 p-0 " style={{ background: `url('/img/BG-05.jpg') center center / cover fixed no-repeat` }}>
-        <section className='fixed w-full top-0 z-[1000]'>
+      <body className="m-0 p-0">
+        <section className="fixed w-full top-0 z-[1000]">
           <CustomNavbar />
         </section>
-        <section>
-          {children}
-        </section>
+        <BackgroundChanger />
+        <section>{children}</section>
       </body>
     </html>
-  )
+  );
 }

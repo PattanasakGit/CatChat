@@ -1,13 +1,12 @@
 'use client'
 import React, { useEffect, useRef, useState } from "react";
-import DisplayChat from "../app/componants/DispayChat";
-import customAPI from "../app/componants/ServerService";
-import { ChatHistory, Message } from "./models/IGemini";
-import { IoSend } from "react-icons/io5";
-import { IoTrashBin } from "react-icons/io5";
-import {useCatStore} from "./store/CatStore";
-import { useClearData } from "./store/ClearDataState";
-import { catLoading } from "./store/Chats";
+import { IoSend, IoTrashBin } from "react-icons/io5";
+import { ChatHistory, Message } from "../models/IGemini";
+import { useCatStore } from "../store/CatStore";
+import { catLoading } from "../store/Chats";
+import { useClearData } from "../store/ClearDataState";
+import customAPI from "../utils/ServerService";
+import DisplayChat from "./componants/DispayChat";
 
 export default function app() {
  const [promptTextInput, setPromptTextInput] = useState<string>("");

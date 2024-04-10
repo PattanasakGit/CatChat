@@ -1,10 +1,10 @@
 'use client'
-import React, { useState, useRef } from 'react';
-import catData from "../../../public/catData.json";
-import { ICat } from '../models/ICat';
-import {useCatStore} from '../../app/store/CatStore';
-import { useClearData } from '../store/ClearDataState';
+import React, { useRef, useState } from 'react';
 import { AiOutlineClose } from "react-icons/ai";
+import catData from "../../../public/catData.json";
+import { ICat } from '../../models/ICat';
+import { useCatStore } from '../../store/CatStore';
+import { useClearData } from '../../store/ClearDataState';
 
 const CustomNavbar: React.FC = () => {
   const [showCatDropdown, setShowCatDropdown] = useState<boolean>(false);
