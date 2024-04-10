@@ -1,4 +1,5 @@
-import create from "zustand";
+import { create } from 'zustand'
+
 import { CatState, ICat } from "../models/ICat";
 import catData from "../../../public/catData.json";
 

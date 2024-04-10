@@ -2,4 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@100..700&display=swap')
+@keyframes rainbow-border {
+    0% { border-color: #E2C2B9; }
+    16.67% { border-color: #BFD8B8; }
+    66.67% { border-color: #79B4B7; }
+    33.33% { border-color: #E7EAB5; }
+    50% { border-color: #F1F7E7; }
+    83.33% { border-color: #BEAEE2; }
+    100% { border-color: #F1CA89; }
+  }
+  
+  .rainbow-border {
+    animation: rainbow-border 5s ease infinite;
+  }
