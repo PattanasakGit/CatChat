@@ -1,5 +1,5 @@
 {
-  "name": "gemini_test",
+  "name": "catchat",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,17 +11,16 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.2.1",
+    "@lottiefiles/react-lottie-player": "^3.5.3",
     "@thatapicompany/thecatapi": "^1.0.2",
     "axios": "^1.6.7",
     "dotenv": "^16.4.5",
     "next": "14.1.0",
+    "random-cat-img": "^1.1.5",
     "react": "^18.2.0",
     "react-dom": "^18",
     "react-icons": "^5.0.1",
     "react-markdown": "^9.0.1",
-    "react-speech-recognition": "^3.10.0",
-    "say": "^0.16.0",
-    "text-to-speech-js": "^1.1.10",
     "yarn": "^1.22.21",
     "zustand": "^4.5.2"
   },

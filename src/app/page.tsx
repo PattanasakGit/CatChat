@@ -7,13 +7,13 @@ import { IoSend } from "react-icons/io5";
 import { IoTrashBin } from "react-icons/io5";
 import {useCatStore} from "./store/CatStore";
 import { useClearData } from "./store/ClearDataState";
-import catLoading from "../../public/catLoding.json"
+import { catLoading } from "./store/Chats";
 
 export default function app() {
  const [promptTextInput, setPromptTextInput] = useState<string>("");
  const [messages, setMessages] = useState<ChatHistory['history']>([]);
  const messagesEndRef = useRef<HTMLDivElement>(null);
- const [isLoading, setIsLoading] = useState(false);
+ const {isChatLoading, setIsChatLoading} = catLoading();
  const { selectedCat } = useCatStore();
  const { isClearData } = useClearData();
 
@@ -22,7 +22,7 @@ export default function app() {
  };
 
  const handleButtonClick = async () => {
-   setIsLoading(true);
+   setIsChatLoading(true);
 
    const userMessage: Message = {
      role: "user",
@@ -53,13 +53,13 @@ export default function app() {
         }
      }
 
-   setIsLoading(false);
+   setIsChatLoading(false);
  };
 
   const handleButtonClear = async () => {
    setMessages([]);
    setPromptTextInput('');
-   setIsLoading(false);
+   setIsChatLoading(false);
  };
 
  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -87,24 +87,19 @@ export default function app() {
          <DisplayChat key={index} message={message} index={index} />
        ))}
        <div ref={messagesEndRef} />
-       {isLoading && (
-         <div className="mt-8 flex mr-2">
-         {catLoading.iframeData.map((iframe, index) => (
-           <iframe
-             key={index}
-             src={iframe.src}
-             className="w-[20vw] md:w-[10vw] lg:w-[8vw] xl:w-[6vw]"
-           ></iframe>
-         ))}
-       </div>
+       {isChatLoading && (
+         <h1 className="bg-[#ffffffc5] text-gray-800 self-start rounded-xl max-w-[90%] lg:max-w-[70%] p-3 border-4 border-transparent border-solid rainbow-border">
+           ~o~ เหมียว😺กำลังพิมพ์ ~o~
+         </h1>
        )}
 
        {messages.length === 0 && (
          <div className="flex items-end w-full h-full justify-center">
-           <iframe
-             src="https://lottie.host/embed/041e19b5-f282-49da-91f3-d7bf64ff3f4a/6wrnG6jRZz.json"
-             className="w-full h-[30vh]"
-           ></iframe>
+           <img
+             src="/img/cat_gif.gif"
+             alt="Cute Cat GIF"
+             className=" rounded-2xl"
+           />
          </div>
        )}
      </div>
