@@ -31,12 +31,12 @@ const BackgroundChanger: React.FC = () => {
   // สร้างภาพสุ่มเมื่อโหลดหน้าเว็บหรือคลิกที่ส่วนของหน้าต่าง
   useState(() => {
     changeBackground();
-  }, []);
+  });
 
   return (
     <div
       className="fixed top-0 left-0 w-full h-full z-0"
-      style={{ background: `url(${backgrounds[backgroundIndex]}) center center / cover fixed no-repeat` }}
+      style={{ background: `url(${backgrounds[backgroundIndex as any]}) center center / cover fixed no-repeat` }}
       onClick={changeBackground}
     ></div>
   );

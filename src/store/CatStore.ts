@@ -13,7 +13,7 @@ export const useCatStore = create<CatState>((set) => ({
 }));
 
 export const useCatBackgroundChange = create<CatBackgroundChangeState>((set) => ({
-  backgroundIndex: 6,
+  backgroundIndex: 4,
   setBackgroundIndex: (index: Number) =>
     set({
       backgroundIndex: index,
