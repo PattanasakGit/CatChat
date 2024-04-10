@@ -21,7 +21,7 @@ const CustomNavbar: React.FC = () => {
   };
 
   const CatDetails: React.FC<{ cat: ICat }> = ({ cat }) => (
-    <div className="flex flex-col items-center transform hover:scale-[1.1] transition-transform duration-300 hover:bg-orange-100 rounded-md ">
+    <div className="flex flex-col items-center transform hover:scale-[1.1] transition-transform duration-300 hover:bg-orange-100 rounded-md hover:border-2 border-transparent border-solid rainbow-border ">
       <img src={cat.image} alt={cat.name} className="py-2 w-[90px] md:w-[110px] lg:w-[125px] xl:w-[150px] rounded-full mb-2" />
       <div className="text-center">
         <h3 className="text-lg sm:text-xl md:text-xl lg:text-[15px] font-bold">{cat.name}</h3>
@@ -38,12 +38,12 @@ const CustomNavbar: React.FC = () => {
         <div className="flex">
           <div className="relative inline-block" ref={catDropdownRef}>
             <button
-              className="flex items-center min-w-32 px-4 py-2 rounded-md bg-white bg-opacity-10 hover:bg-orange-500"
+              className="flex items-center min-w-32 px-4 py-2 rounded-md bg-white bg-opacity-10 hover:bg-orange-500 border-2 border-transparent border-solid rainbow-border"
               onClick={toggleCatDropdown}
             >
               {selectedCat && (
                 <>
-                  <div className="flex items-center">
+                  <div className="flex items-center ">
                     <img
                       src={selectedCat.image}
                       alt={selectedCat.name}
@@ -68,7 +68,7 @@ const CustomNavbar: React.FC = () => {
                   </div>
 
                 <div
-                  className="bg-white text-gray-800 rounded-[20px] shadow-lg p-4 
+                  className="bg-[#ffffff55] backdrop-blur-[100px] text-gray-800 rounded-[20px] shadow-lg p-4 
                   w-[96%] md:w-[70%] lg:w-[60%] xl:w-[50%] overflow-auto h-[70vh] xl:overflow-hide
                 "
                 >
